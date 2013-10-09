@@ -12,11 +12,19 @@ def main():
 	win = GraphWin("Hej",winWidth,winHeight)
 	background = Image(Point(0,0),"images/grass.gif")
 	background.draw(win)
+	
 	currentScore = 0
 	displayScore = Text(Point(winWidth/2,25),"Score: " + str(currentScore))
 	displayScore.setStyle("bold")
 	displayScore.setSize(18)
 	displayScore.draw(win)
+	
+	currentLife = 100
+	displayLife = Text(Point(60,25),"Life: " + str(currentLife))
+	displayLife.setStyle("bold")
+	displayLife.setSize(18)
+	displayLife.draw(win)
+	
 	enemies = []
 	
 	while display:
@@ -44,6 +52,13 @@ def main():
 					currentScore = currentScore + 1
 					displayScore.setText("Score: " + str(currentScore))
 				count = count + 1
+		count = 0
+		for x in enemies:
+			center_x = enemies[count].getCenter().getX()
+			if(center_x < 0):
+				currentLife = currentLife - 10
+				displayLife.setText("Life: " + str(currentLife))
+			count = count + 1
 		
 		time.sleep(0.01)
 main()
