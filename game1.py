@@ -28,6 +28,8 @@ def main():
 	enemies = []
 	
 	while display:
+		if(currentLife == 0):
+			break
 		randNumber = random.randint(1,100)
 		if(randNumber == 50):
 			enemyTypes = [circle.Circle1(),enemy1.Enemy1()]
@@ -56,7 +58,8 @@ def main():
 		count = 0
 		for x in enemies:
 			center_x = enemies[count].getCenter().getX()
-			if(center_x < 0):
+			if(center_x < -50):
+				del(enemies[count])
 				currentLife = currentLife - 10
 				displayLife.setText("Life: " + str(currentLife))
 			count = count + 1
