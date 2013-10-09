@@ -8,7 +8,7 @@ class Enemy1:
 	nextImageOrNot = 0
 
 	def __init__(self):
-		self.ball = Image(Point(1400,random.randint(20,700)),"images/enemy1/1.gif")
+		self.ball = Image(Point(1400,random.randint(50,620)),"images/enemy1/1.gif")
 		self.currentImage = itertools.cycle('123456789')
 	
 	def draw(self,window):

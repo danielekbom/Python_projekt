@@ -1,7 +1,6 @@
 from graphics import *
 import time
 import random
-import circle
 import enemy1
 import enemy2
 
@@ -11,17 +10,17 @@ def main():
 	winWidth = 1400
 	winHeight = 700
 	win = GraphWin("Hej",winWidth,winHeight)
-	background = Image(Point(0,0),"images/grass.gif")
+	background = Image(Point(700,350),"images/background1.gif")
 	background.draw(win)
 	
 	currentScore = 0
-	displayScore = Text(Point(winWidth/2,25),"Score: " + str(currentScore))
+	displayScore = Text(Point(winWidth/2,18),"Score: " + str(currentScore))
 	displayScore.setStyle("bold")
 	displayScore.setSize(18)
 	displayScore.draw(win)
 	
 	currentLife = 100
-	displayLife = Text(Point(60,25),"Life: " + str(currentLife))
+	displayLife = Text(Point(140,18),"Life: " + str(currentLife))
 	displayLife.setStyle("bold")
 	displayLife.setSize(18)
 	displayLife.draw(win)
@@ -33,7 +32,7 @@ def main():
 			break
 		randNumber = random.randint(1,100)
 		if(randNumber == 50):
-			enemyTypes = [circle.Circle1(),enemy1.Enemy1(),enemy2.Enemy2()]
+			enemyTypes = [enemy1.Enemy1(),enemy2.Enemy2()]
 			enemies.append(enemyTypes[random.randint(0,len(enemyTypes) - 1)])
 			lastCircle = len(enemies) - 1
 			enemies[lastCircle].draw(win)
