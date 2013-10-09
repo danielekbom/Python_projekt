@@ -3,6 +3,8 @@ import time
 import random
 
 class Circle1:
+	eliminated = False
+
 	def __init__(self):
 		self.ball = Circle(Point(1400,random.randint(20,700)),10)
 		self.ball.setFill("red")
@@ -18,4 +20,5 @@ class Circle1:
 		return self.ball.getCenter()
 		
 	def changeColor(self,window):
+		self.eliminated = True
 		self.ball.setFill("green")

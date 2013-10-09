@@ -37,7 +37,8 @@ def main():
 		if(len(enemies) > 0):
 			count = 0
 			for x in enemies:
-				enemies[count].move()
+				if(enemies[count].eliminated == False):
+					enemies[count].move()
 				count = count + 1
 		clicked = win.checkMouse()
 		if clicked:

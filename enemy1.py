@@ -4,6 +4,8 @@ import random
 import itertools
 
 class Enemy1:
+	eliminated = False
+
 	def __init__(self):
 		self.ball = Image(Point(1400,random.randint(20,700)),"images/enemy1/1.gif")
 		self.currentImage = itertools.cycle('123456789')
@@ -20,9 +22,11 @@ class Enemy1:
 		return self.ball.getAnchor()
 		
 	def changeColor(self,window):
+		self.eliminated = True
 		self.ball.undraw()
 		eliminated = Image(self.getCenter(),"images/enemy1_eliminated.gif")
 		eliminated.draw(window)
+		
 	
 	def nextImage(self):
 		self.ball.undraw()
