@@ -29,7 +29,7 @@ class Enemy1:
 	def changeColor(self,window):
 		self.eliminated = True
 		self.ball.undraw()
-		eliminated = Image(self.getCenter(),"images/enemy1_eliminated.gif")
+		eliminated = Image(self.getCenter(),"images/enemy1/enemy1_eliminated.gif")
 		eliminated.draw(window)
 		
 	
