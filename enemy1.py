@@ -21,9 +21,9 @@ class Enemy1:
 		self.ball.undraw()
 		eliminated = Image(self.getCenter(),"images/enemy1_eliminated.gif")
 		eliminated.draw(window)
-		
+	
 	def nextImage(self):
 		self.ball.undraw()
 		self.ball = Image(self.getCenter(),"images/enemy1/" + next(self.currentImage) +  ".gif")
-		eliminated.draw(window)
+		self.ball.draw(window)
 		
