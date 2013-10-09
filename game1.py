@@ -50,7 +50,7 @@ def main():
 			for x in enemies:
 				center_x = enemies[count].getCenter().getX()
 				center_y = enemies[count].getCenter().getY()
-				if((click_x > center_x-10 and click_x < center_x+10) and (click_y > center_y-10 and click_y < center_y+10)):
+				if((click_x > center_x-10 and click_x < center_x+10) and (click_y > center_y-15 and click_y < center_y+15) and (enemies[count].eliminated == False)):
 					enemies[count].changeColor(win)
 					currentScore = currentScore + 1
 					displayScore.setText("Score: " + str(currentScore))
