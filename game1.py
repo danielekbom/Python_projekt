@@ -12,6 +12,8 @@ def main():
 	win = GraphWin("Hej",winWidth,winHeight)
 	background = Image(Point(700,350),"images/background1.gif")
 	background.draw(win)
+	hero = Image(Point(100,300),"images/hero/hero1.gif")
+	hero.draw(win)
 	
 	currentScore = 0
 	displayScore = Text(Point(winWidth/2,18),"Score: " + str(currentScore))
