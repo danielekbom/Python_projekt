@@ -7,9 +7,16 @@ import enemy1
 def main():
    
 	display = True
-	win = GraphWin("Hej",1400,700)
+	winWidth = 1400
+	winHeight = 700
+	win = GraphWin("Hej",winWidth,winHeight)
 	background = Image(Point(0,0),"images/grass.gif")
 	background.draw(win)
+	currentScore = 0
+	displayScore = Text(Point(winWidth/2,25),"Score: " + str(currentScore))
+	displayScore.setStyle("bold")
+	displayScore.setSize(18)
+	displayScore.draw(win)
 	enemies = []
 	
 	while display:
@@ -34,6 +41,8 @@ def main():
 				center_y = enemies[count].getCenter().getY()
 				if((click_x > center_x-10 and click_x < center_x+10) and (click_y > center_y-10 and click_y < center_y+10)):
 					enemies[count].changeColor(win)
+					currentScore = currentScore + 1
+					displayScore.setText("Score: " + str(currentScore))
 				count = count + 1
 		
 		time.sleep(0.01)
