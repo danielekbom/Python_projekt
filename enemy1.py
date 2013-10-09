@@ -9,11 +9,12 @@ class Enemy1:
 		self.currentImage = itertools.cycle('123456789')
 	
 	def draw(self,window):
+		self.win=window
 		self.ball.draw(window)
 		
 	def move(self):
 		self.ball.move(-1,0)
-		nextImage()
+		self.nextImage()
 		
 	def getCenter(self):
 		return self.ball.getAnchor()
@@ -26,5 +27,5 @@ class Enemy1:
 	def nextImage(self):
 		self.ball.undraw()
 		self.ball = Image(self.getCenter(),"images/enemy1/" + next(self.currentImage) +  ".gif")
-		self.ball.draw(window)
+		self.ball.draw(self.win)
 		
