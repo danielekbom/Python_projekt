@@ -13,6 +13,7 @@ class Enemy1:
 		
 	def move(self):
 		self.ball.move(-1,0)
+		nextImage()
 		
 	def getCenter(self):
 		return self.ball.getAnchor()
