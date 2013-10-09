@@ -5,6 +5,7 @@ import itertools
 
 class Enemy1:
 	eliminated = False
+	nextImageOrNot = 0
 
 	def __init__(self):
 		self.ball = Image(Point(1400,random.randint(20,700)),"images/enemy1/1.gif")
@@ -16,7 +17,11 @@ class Enemy1:
 		
 	def move(self):
 		self.ball.move(-1,0)
-		self.nextImage()
+		if(self.nextImageOrNot == 1):
+			self.nextImage()
+		if(self.nextImageOrNot == 5):
+			self.nextImageOrNot = 0
+		self.nextImageOrNot = self.nextImageOrNot + 1
 		
 	def getCenter(self):
 		return self.ball.getAnchor()
