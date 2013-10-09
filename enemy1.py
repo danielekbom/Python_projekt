@@ -1,12 +1,12 @@
 from graphics import *
 import time
 import random
+import itertools
 
 class Enemy1:
 	def __init__(self):
-		self.ball = Image(Point(1400,random.randint(20,700)),"images/enemy1.gif")
-		pictures = [1,2,3,4,5,6,7,8,9]
-		currentImage = self.
+		self.ball = Image(Point(1400,random.randint(20,700)),"images/enemy1/1.gif")
+		self.currentImage = itertools.cycle('123456789')
 	
 	def draw(self,window):
 		self.ball.draw(window)
@@ -24,6 +24,6 @@ class Enemy1:
 		
 	def nextImage(self):
 		self.ball.undraw()
-		self.ball = Image(self.getCenter(),"images/enemy1/" + x +  ".gif")
+		self.ball = Image(self.getCenter(),"images/enemy1/" + next(self.currentImage) +  ".gif")
 		eliminated.draw(window)
 		
