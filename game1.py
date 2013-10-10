@@ -44,7 +44,7 @@ def main():
 		randNumber = random.randint(1,100)
 		if(randNumber == 50):
 			enemyTypes = [enemy1.Enemy1(),enemy2.Enemy2()]
-			enemies.append(enemyTypes[random.randint(0,len(enemyTypes) - 1)])
+			enemies.append(random.choice(enemyTypes))
 			lastCircle = len(enemies) - 1
 			enemies[lastCircle].draw(win)
 		if(len(enemies) > 0):
