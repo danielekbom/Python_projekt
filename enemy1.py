@@ -4,28 +4,39 @@ import random
 import itertools
 
 class Enemy1:
+	
 	def __init__(self):
-		self.ball = Image(Point(1400,random.randint(20,700)),"images/enemy1/1.gif")
-		self.currentImage = itertools.cycle('123456789')
+		self.pos=Point(1400,random.randint(20,700))
+		self.enemyImages = itertools.cycle([Image(Point(self.pos.getX()-int(x),self.pos.getY()),"images/enemy1/" + x +  ".gif") for x in '123456789'])
+		self.ball = next(self.enemyImages)
+		self.eliminated=False
 	
 	def draw(self,window):
 		self.win=window
 		self.ball.draw(window)
-		
+	
 	def move(self):
-		self.ball.move(-1,0)
-		self.nextImage()
+		if(not self.eliminated):
+			self.ball.undraw()
+			self.ball.move(-10,0)
+			self.ball = next(self.enemyImages)
+			self.ball.draw(self.win)
+			self.pos=self.ball.getAnchor()
 		
 	def getCenter(self):
-		return self.ball.getAnchor()
-		
-	def changeColor(self,window):
-		self.ball.undraw()
-		eliminated = Image(self.getCenter(),"images/enemy1_eliminated.gif")
-		eliminated.draw(window)
+		return self.pos
+
+	def changeColor(self,window=None):
+		if not window:
+			window=self.win
+		if self.eliminated:
+			self.eliminated.undraw()
+			del self
+		else:
+			self.ball.undraw()
+			del self.ball
+			del self.enemyImages
+			self.eliminated = Image(self.pos,"images/enemy1_eliminated.gif")
+			self.eliminated.draw(window)
 	
-	def nextImage(self):
-		self.ball.undraw()
-		self.ball = Image(self.getCenter(),"images/enemy1/" + next(self.currentImage) +  ".gif")
-		self.ball.draw(self.win)
 		
