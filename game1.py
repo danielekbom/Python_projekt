@@ -22,7 +22,7 @@ def main():
 	displayScore.setSize(18)
 	displayScore.draw(win)
 	
-	currentLife = 100
+	currentLife = 20
 	displayLife = Text(Point(140,18),"Life: " + str(currentLife))
 	displayLife.setStyle("bold")
 	displayLife.setSize(18)
@@ -73,11 +73,17 @@ def main():
 		count = 0
 		for x in enemies:
 			center_x = enemies[count].getCenter().getX()
-			if(center_x < -50):
+			if(center_x < 800):
 				del(enemies[count])
 				currentLife = currentLife - 10
 				displayLife.setText("Life: " + str(currentLife))
 			count = count + 1
 		
 		time.sleep(0.01)
+		
+	gameOverText = Text(Point(500,200),"Game Over")
+	gameOverText.setStyle("bold")
+	gameOverText.setSize(36)
+	gameOverText.draw(window)
+	wait = window.getMouse()
 main()
