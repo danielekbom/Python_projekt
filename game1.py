@@ -44,8 +44,8 @@ def main():
 			break
 		randNumber = random.randint(1,100)
 		if(randNumber == 50):
-			enemyTypes = [enemy1.Enemy1(),enemy2.Enemy2(),enemy3.Enemy3()]
-			enemies.append(random.choice(enemyTypes))
+			enemyTypes = [enemy1.Enemy1,enemy2.Enemy2,enemy3.Enemy3]
+			enemies.append(random.choice(enemyTypes)())
 			lastCircle = len(enemies) - 1
 			enemies[lastCircle].draw(win)
 		if(len(enemies) > 0):
@@ -85,6 +85,6 @@ def main():
 	gameOverText = Text(Point(500,200),"Game Over")
 	gameOverText.setStyle("bold")
 	gameOverText.setSize(36)
-	gameOverText.draw(window)
-	wait = window.getMouse()
+	gameOverText.draw(win)
+	wait = win.getMouse()
 main()
