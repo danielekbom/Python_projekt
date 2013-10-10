@@ -9,7 +9,7 @@ class Boss1:
 	
 	def __init__(self):
 		self.ball = Image(Point(1400,random.randint(50,580)),"images/boss1/1.gif")
-		self.currentImage = itertools.cycle('1')
+		self.currentImage = itertools.cycle('123456789')
 	
 	def draw(self,window):
 		self.win=window
