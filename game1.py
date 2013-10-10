@@ -3,6 +3,7 @@ import time
 import random
 import enemy1
 import enemy2
+import enemy3
 
 def main():
    
@@ -43,7 +44,7 @@ def main():
 			break
 		randNumber = random.randint(1,100)
 		if(randNumber == 50):
-			enemyTypes = [enemy1.Enemy1(),enemy2.Enemy2()]
+			enemyTypes = [enemy1.Enemy1(),enemy2.Enemy2(),enemy3.Enemy3()]
 			enemies.append(random.choice(enemyTypes))
 			lastCircle = len(enemies) - 1
 			enemies[lastCircle].draw(win)
