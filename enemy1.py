@@ -11,6 +11,7 @@ class Enemy1:
 		self.ball = next(self.enemyImages)
 		self.eliminated=False
 		self.changeImageCycle=itertools.cycle([True,False,False,False,False])
+		self.killtime=200
 	
 	def draw(self,window):
 		self.win=window
@@ -24,6 +25,12 @@ class Enemy1:
 				self.ball = next(self.enemyImages)
 				self.ball.draw(self.win)
 				self.pos=self.ball.getAnchor()
+		else:
+			self.killtime=self.killtime-1
+			if(self.killtime <=0):
+				self.eliminated.undraw()
+				del self.eliminated
+				del self
 		
 	def getCenter(self):
 		return self.pos
