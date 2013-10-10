@@ -4,12 +4,13 @@ import random
 import itertools
 
 class Enemy1:
-	
+	eliminated=False
 	def __init__(self):
 		self.pos=Point(1400,random.randint(20,700))
 		self.enemyImages = itertools.cycle([Image(Point(self.pos.getX()-int(x),self.pos.getY()),"images/enemy1/" + x +  ".gif") for x in '123456789'])
 		self.ball = next(self.enemyImages)
 		self.eliminated=False
+		self.changeImageCycle=itertools.cycle([True,False,False,False,False])
 	
 	def draw(self,window):
 		self.win=window
@@ -17,11 +18,12 @@ class Enemy1:
 	
 	def move(self):
 		if(not self.eliminated):
-			self.ball.undraw()
-			self.ball.move(-10,0)
-			self.ball = next(self.enemyImages)
-			self.ball.draw(self.win)
-			self.pos=self.ball.getAnchor()
+			if next(self.changeImageCycle):
+				self.ball.undraw()
+				self.ball.move(-10,0)
+				self.ball = next(self.enemyImages)
+				self.ball.draw(self.win)
+				self.pos=self.ball.getAnchor()
 		
 	def getCenter(self):
 		return self.pos
@@ -36,7 +38,6 @@ class Enemy1:
 			self.ball.undraw()
 			del self.ball
 			del self.enemyImages
-			self.eliminated = Image(self.pos,"images/enemy1_eliminated.gif")
+			self.eliminated = Image(self.pos,"images/enemy1/enemy1_eliminated.gif")
 			self.eliminated.draw(window)
-	
-		
+
