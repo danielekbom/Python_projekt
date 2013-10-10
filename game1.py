@@ -74,7 +74,7 @@ def main():
 		count = 0
 		for x in enemies:
 			center_x = enemies[count].getCenter().getX()
-			if(center_x < 800):
+			if(center_x < -50):
 				del(enemies[count])
 				currentLife = currentLife - 10
 				displayLife.setText("Life: " + str(currentLife))
