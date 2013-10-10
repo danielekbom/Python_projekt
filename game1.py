@@ -14,6 +14,7 @@ def main():
 	background.draw(win)
 	hero = Image(Point(100,300),"images/hero/hero1.gif")
 	hero.draw(win)
+	heroShooting = False
 	
 	currentScore = 0
 	displayScore = Text(Point(winWidth/2,18),"Score: " + str(currentScore))
@@ -28,8 +29,16 @@ def main():
 	displayLife.draw(win)
 	
 	enemies = []
+	quitShooting = 0
 	
 	while display:
+		quitShooting = quitShooting + 1
+		if(heroShooting and quitShooting > 50):
+			hero.undraw()
+			hero = Image(Point(100,300),"images/hero/hero1.gif")
+			hero.draw(win)
+			heroShooting = False
+			quitShooting = 0
 		if(currentLife == 0):
 			break
 		randNumber = random.randint(1,100)
@@ -46,6 +55,10 @@ def main():
 				count = count + 1
 		clicked = win.checkMouse()
 		if clicked:
+			hero.undraw()
+			hero = Image(Point(100,300),"images/hero/hero1_shoot.gif")
+			hero.draw(win)
+			heroShooting = True
 			click_x = clicked.getX()
 			click_y = clicked.getY()
 			count = 0
