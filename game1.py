@@ -4,6 +4,7 @@ import random
 import enemy1
 import enemy2
 import enemy3
+import enemy4
 
 def main():
    
@@ -44,7 +45,7 @@ def main():
 			break
 		randNumber = random.randint(1,100)
 		if(randNumber == 50):
-			enemyTypes = [enemy1.Enemy1,enemy2.Enemy2,enemy3.Enemy3]
+			enemyTypes = [enemy1.Enemy1,enemy2.Enemy2,enemy3.Enemy3,enemy4.Enemy4]
 			enemies.append(random.choice(enemyTypes)())
 			lastCircle = len(enemies) - 1
 			enemies[lastCircle].draw(win)
