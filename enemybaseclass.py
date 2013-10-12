@@ -81,6 +81,6 @@ class Enemies(Image):
 class Boss(Enemies):
     '''Boss Base Class'''
 
-def listEnemies(): 
+def getEnemiesList():
     '''gives all enemies as a list of strings'''
-    return [item[0] for item in inspect.getmembers(sys.modules[__name__], lambda member: inspect.isclass(member) and member.__module__ == __name__)]
+    return [item[1] for item in inspect.getmembers(sys.modules["enemies"], lambda member: inspect.isclass(member) and member.__module__ == "enemies")]
