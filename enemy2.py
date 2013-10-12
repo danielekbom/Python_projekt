@@ -10,6 +10,7 @@ class Enemy2:
 	def __init__(self):
 		self.ball = Image(Point(1400,random.randint(50,580)),"images/enemy2/1.gif")
 		self.currentImage = itertools.cycle('12345')
+		self.nextImageOrNot = itertools.cycle([True,False,False,False,False])
 	
 	def draw(self,window):
 		self.win=window
@@ -17,11 +18,8 @@ class Enemy2:
 		
 	def move(self):
 		self.ball.move(-1,0)
-		if(self.nextImageOrNot == 1):
+		if next(self.nextImageOrNot):
 			self.nextImage()
-		if(self.nextImageOrNot == 5):
-			self.nextImageOrNot = 0
-		self.nextImageOrNot = self.nextImageOrNot + 1
 		
 	def getCenter(self):
 		return self.ball.getAnchor()

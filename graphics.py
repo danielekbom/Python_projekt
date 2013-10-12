@@ -3,7 +3,27 @@
 
 The library is designed to make it very easy for novice programmers to
 experiment with computer graphics in an object oriented fashion. It is
-written by John Zelle for use with the book "Python Programming: An
+written by John Zelle for use oint(window.getWidth(),randint(50,window.getHeight()-self.getHeight()))
+        self.movementSpeed=10.0
+        self.movementTick=0
+        self.animationRatio=1.0
+        self.animationTick=0
+        self.eliminated=False
+        self.hp=1
+    
+    def walk(self,speedMultiplier=1.0):
+        '''
+        Gives one "tick" to the object. When enough ticks are
+        reached, updates the animation and moves the object one
+        step.
+        
+            Speed - A float multiplier from standard speed.
+                    Defaults to 1.0
+        '''
+        if speedMultiplier==None: speedMultipier=1.0
+        self.movementTick=self.movementTick+1
+        if self.movementTick>=100.0/(self.movementSpeed*speedMultiplier):
+            self.movewith the book "Python Programming: An
 Introduction to Computer Science" (Franklin, Beedle & Associates).
 
 LICENSE: This is open-source software released under the terms of the
