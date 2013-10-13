@@ -97,7 +97,7 @@ class Game(GraphWin):
 		''' TODO Lgga till meny
 		Placeholder returnera om spelet ska fortstta eller inte.
 		'''
-		return self.gameRunning
+		self.play()
 	
 	
 	def waitForClick(self):
@@ -118,8 +118,8 @@ class Hero():
 
 def main():
 	game=Game()
-	while game.gameRunning and game.menu():
-		game.play()
+	while game.gameRunning:
+		game.menu()
 
 if __name__ == "__main__":
 	main()
