@@ -21,7 +21,7 @@ class Enemies(Image):
         self.photoImages=itertools.cycle([tk.PhotoImage(file=image, master=g._root) for image in images])
         self.img = next(self.photoImages)
         self.anchor = Point(window.getWidth(),randint(50,window.getHeight()-self.getHeight()))
-        self.movementSpeed=10.0
+        self.movementSpeed=20.0
         self.movementTick=0
         self.animationRatio=1.0
         self.animationTick=0
@@ -44,7 +44,7 @@ class Enemies(Image):
         self.animationTick=self.animationTick+1
         
         if self.movementTick>=100.0/(self.movementSpeed*speedMultiplier):
-            self.move(-1,0)
+            self.move(-2,0)
             self.movementTick=0
         if self.animationTick>=100.0/(self.movementSpeed*speedMultiplier*self.animationRatio):
             self.undraw()
@@ -60,11 +60,13 @@ class Enemies(Image):
         return self.animationRatio
     
     def setMovementSpeed(self,movementSpeed):
-        '''movmentSpeed should be between 0 and 100'''
+        '''
+        movmentSpeed should be between 0 and 100, defaults to 20.0
+        '''
         if 0<movementSpeed<=100:
             self.speed=movementSpeed
         else:
-            raise ValueError("speed should be between 0 and 100")
+            raise ValueError("movementSpeed should be between 0 and 100")
 
     def getMovementSpeed(self):
         return self.movementSpeed
