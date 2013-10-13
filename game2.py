@@ -1,7 +1,7 @@
 from graphics import _root,GraphWin,Point,Image,Text
 import time
 import random
-import enemies
+import enemyclasses
 try:
 	import Tkinter as tk
 except:
@@ -64,7 +64,7 @@ class Game(GraphWin):
 		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
 		background.draw(self)
 		hero=Hero()
-		enemy=[enemies.enemy1(self),enemies.enemy2(self),enemies.enemy3(self),enemies.enemy4(self),enemies.enemy5(self),enemies.enemy6(self)]
+		enemy=[enemyclasses.enemy1(self),enemyclasses.enemy2(self),enemyclasses.enemy3(self),enemyclasses.enemy4(self),enemyclasses.enemy5(self),enemyclasses.enemy6(self)]
 		
 		
 		while self.gameRunning:

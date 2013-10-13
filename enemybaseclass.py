@@ -86,7 +86,7 @@ class Boss(Enemies):
 
 def getEnemiesList():
     '''gives all enemies as a list of classes'''
-    return [item[1] for item in inspect.getmembers(sys.modules["enemies"], lambda member: inspect.isclass(member) and member.__module__ == "enemies") if not issubclass(item[1],Boss)]
+    return [item[1] for item in inspect.getmembers(sys.modules["enemyclasses"], lambda member: inspect.isclass(member) and member.__module__ == "enemyclasses") if not issubclass(item[1],Boss)]
 
 def getEnemiesUpToLevel(level):
     return [enemy for enemy in getEnemiesList() if not enemy.level==None and enemy.level <= level]
