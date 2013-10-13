@@ -1,19 +1,21 @@
-import graphics as g
-from graphics import *
+from graphics import _root,GraphWin,Point,Image,Text
 import time
 import random
 import enemies
 import Tkinter as tk
 
 
+MARGIN_TOP_BOTTOM=72
+MARGIN_SIDES=72
+
 class Game(GraphWin):
 	
 	def __init__(self):
-		width = g._root.winfo_screenwidth()-72
-		height = g._root.winfo_screenheight()-72
 		#GraphWin.__init__
+		master = tk.Toplevel(_root)
+		width = master.winfo_screenwidth()-MARGIN_SIDES
+		height = master.winfo_screenheight()-MARGIN_TOP_BOTTOM
 		title="AlabamaMAN! Shootin' turtels and beavers and snakes and frikkin' BEATURAKES! AlabamaMAN!"
-		master = tk.Toplevel(g._root)
 		master.protocol("WM_DELETE_WINDOW", self.close)
 		tk.Canvas.__init__(self, master, width=width, height=height,cursor="cross")
 		self.master.title(title)
@@ -51,7 +53,7 @@ class Game(GraphWin):
 		while self.checkMouse()==None:
 			enemy.walk()
 			time.sleep(0.01)
-		self.getMouse()
+			
 		self.gameOver()
 		del background
 		
@@ -70,7 +72,7 @@ class Game(GraphWin):
 	def menu(self):
 		if False:
 			return False
-		self.endGame=False
+		self.gameRunning=False
 		return True
 
 def main():
