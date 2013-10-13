@@ -17,7 +17,7 @@ def main():
 	winWidth = 1400
 	winHeight = 700
 	win = GraphWin("Hej",winWidth,winHeight)
-	background = Image(Point(700,350),"images/background2.gif")
+	background = Image(Point(700,350),"images/background3.gif")
 	background.draw(win)
 	hero = Image(Point(100,300),"images/hero/hero1.gif")
 	hero.draw(win)
