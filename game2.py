@@ -64,7 +64,7 @@ class Game(GraphWin):
 		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
 		background.draw(self)
 		hero=Hero()
-		enemy=[enemies.enemy1(self)]
+		enemy=[enemies.enemy1(self),enemies.enemy2(self),enemies.enemy3(self),enemies.enemy4(self),enemies.enemy5(self),enemies.enemy6(self)]
 		
 		
 		while self.gameRunning:
