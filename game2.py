@@ -52,8 +52,15 @@ class Game(GraphWin):
 		del closeText
 		self.gameRunning=False
 	
-	def play(self):
-		'''Starts a new game. Game loop idea taken from http://www.koonsolo.com/news/dewitters-gameloop/'''
+	def play(self, level=None):
+		'''
+		Starts a new game.
+		
+		level - Start a game at level <level>
+		
+		Game loop idea taken from
+		http://www.koonsolo.com/news/dewitters-gameloop/
+		'''
 		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
 		background.draw(self)
 		hero=Hero()
