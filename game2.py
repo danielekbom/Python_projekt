@@ -104,6 +104,14 @@ class Game(GraphWin):
 	
 	
 	def getMouse(self):
+		'''
+		Overwrites the getMouse function in GraphWin
+		
+		Waits for mouse click. Aborts if gameRunning becomes False.
+
+		Returns graphics.Point() with coordinates of mouse click, or
+		None if gameRunning becomes False
+		'''
 		while self.gameRunning:
 			mouseClick=self.checkMouse()
 			if mouseClick==None:
