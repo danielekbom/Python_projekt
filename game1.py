@@ -8,6 +8,7 @@ import enemy4
 import enemy5
 import enemy6
 import enemy7
+import enemy8
 import boss1
 import boss2
 
@@ -50,7 +51,7 @@ def main():
 			break
 		randNumber = random.randint(1,100)
 		if(randNumber == 50):
-			enemyTypes = [enemy1.Enemy1,enemy2.Enemy2,enemy3.Enemy3,enemy4.Enemy4,boss1.Boss1,enemy5.Enemy5,enemy6.Enemy6,enemy7.Enemy7,boss2.Boss2]
+			enemyTypes = [enemy1.Enemy1,enemy2.Enemy2,enemy3.Enemy3,enemy4.Enemy4,boss1.Boss1,enemy5.Enemy5,enemy6.Enemy6,enemy7.Enemy7,boss2.Boss2,enemy8.Enemy8]
 			enemies.append(random.choice(enemyTypes)())
 			lastCircle = len(enemies) - 1
 			enemies[lastCircle].draw(win)
