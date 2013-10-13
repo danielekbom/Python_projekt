@@ -2,8 +2,10 @@ from graphics import _root,GraphWin,Point,Image,Text
 import time
 import random
 import enemies
-import Tkinter as tk
-
+try:
+	import Tkinter as tk
+except:
+	import tkinter as tk
 
 MARGIN_TOP_BOTTOM=72
 MARGIN_SIDES=72
@@ -51,6 +53,7 @@ class Game(GraphWin):
 		self.gameRunning=False
 	
 	def play(self):
+		'''Starts a new game. Game loop idea taken from http://www.koonsolo.com/news/dewitters-gameloop/'''
 		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
 		background.draw(self)
 		hero=Hero()
