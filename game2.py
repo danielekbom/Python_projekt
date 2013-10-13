@@ -32,18 +32,22 @@ class Game(GraphWin):
 		self._mouseCallback = None
 		self.trans = None
 		self.closed = False
+		self.gameClosing = False
+		self.gameRunning = True
 		master.lift()
 		if self.autoflush: _root.update()
 	
 	def close(self):
+		if self.gameClosing:
+			return
+		self.gameClosing=True
 		closeText = Text(Point(self.width/2,self.height/2),"Close?")
 		closeText.setStyle("bold")
 		closeText.setSize(36)
 		closeText.draw(self)
 		wait = self.getMouse()
 		del closeText
-		GraphWin.close(self)
-		
+		self.gameRunning=False
 	
 	def play(self):
 		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
@@ -56,6 +60,7 @@ class Game(GraphWin):
 			
 		self.gameOver()
 		del background
+		GraphWin.close(self)
 		
 	def highscore(self):
 		pass
