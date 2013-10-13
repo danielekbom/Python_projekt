@@ -65,7 +65,8 @@ class Game(GraphWin):
 			if mouseClick:
 				pass
 				
-			enemy[0].walk()
+			for en in enemy:
+				en.walk()
 			
 			
 			
