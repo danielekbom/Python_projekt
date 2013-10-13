@@ -45,20 +45,38 @@ class Game(GraphWin):
 		closeText.setStyle("bold")
 		closeText.setSize(36)
 		closeText.draw(self)
-		wait = self.getMouse()
+		wait = self.waitForClick()
+		closeText.undraw()
 		del closeText
 		self.gameRunning=False
 	
 	def play(self):
 		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
 		background.draw(self)
-		enemy=enemies.enemy1(self)
-		self.getMouse()
-		while self.checkMouse()==None:
-			enemy.walk()
-			time.sleep(0.01)
+		hero=Hero()
+		enemy=[enemies.enemy1(self)]
+		
+		
+		while self.gameRunning:
+			mouseClick = self.checkMouse()
+			if mouseClick:
+				print self.gameRunning
+				print mouseClick
+				
+			enemy[0].walk()
 			
-		self.gameOver()
+			
+			
+			time.sleep(0.01)
+			_root.update()
+			
+			del mouseClick
+			if self.gameRunning and hero.isDead():
+				self.gameOver()
+		for en in enemy:
+			del en
+		del enemy
+		del hero
 		del background
 		GraphWin.close(self)
 		
@@ -70,21 +88,38 @@ class Game(GraphWin):
 		gameOverText.setStyle("bold")
 		gameOverText.setSize(36)
 		gameOverText.draw(self)
-		wait = self.getMouse()
-		
+		wait = self.waitForClick()
+		gameOverText.undraw()
 		del gameOverText
+		self.highscore()
 		
 	def menu(self):
-		if False:
-			return False
-		self.gameRunning=False
-		return True
+		''' TODO Lgga till meny
+		Placeholder returnera om spelet ska fortstta eller inte.
+		'''
+		return self.gameRunning
+	
+	
+	def waitForClick(self):
+		while self.gameRunning:
+			mouseClick=self.checkMouse()
+			if mouseClick==None:
+				time.sleep(0.005)
+			else:
+				return mouseClick
+		return None
+
+class Hero():
+	'''Our hero! Haz HP and shit!'''
+	hp=100
+	def isDead(self):
+		'''Is he dead? Hell NO!'''
+		return self.hp<=0
 
 def main():
 	game=Game()
-	while game.menu():
+	while game.gameRunning and game.menu():
 		game.play()
-		game.highscore()
 
 if __name__ == "__main__":
 	main()
