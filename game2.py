@@ -47,7 +47,7 @@ class Game(GraphWin):
 		closeText.setStyle("bold")
 		closeText.setSize(36)
 		closeText.draw(self)
-		wait = self.waitForClick()
+		wait = self.getMouse()
 		closeText.undraw()
 		del closeText
 		self.gameRunning=False
@@ -63,8 +63,7 @@ class Game(GraphWin):
 		while self.gameRunning:
 			mouseClick = self.checkMouse()
 			if mouseClick:
-				print self.gameRunning
-				print mouseClick
+				pass
 				
 			enemy[0].walk()
 			
@@ -91,7 +90,7 @@ class Game(GraphWin):
 		gameOverText.setStyle("bold")
 		gameOverText.setSize(36)
 		gameOverText.draw(self)
-		wait = self.waitForClick()
+		wait = self.getMouse()
 		gameOverText.undraw()
 		del gameOverText
 		self.highscore()
@@ -103,7 +102,7 @@ class Game(GraphWin):
 		self.play()
 	
 	
-	def waitForClick(self):
+	def getMouse(self):
 		while self.gameRunning:
 			mouseClick=self.checkMouse()
 			if mouseClick==None:
