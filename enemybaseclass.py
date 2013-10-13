@@ -8,6 +8,7 @@ import sys
 import inspect
 
 class Enemies(Image):
+    level=None
     def __init__(self,window):
         self.window=window
         g.GraphicsObject.__init__(self, [])
@@ -86,4 +87,4 @@ def getEnemiesList():
     return [item[1] for item in inspect.getmembers(sys.modules["enemies"], lambda member: inspect.isclass(member) and member.__module__ == "enemies") if not issubclass(item[1],Boss)]
 
 def getEnemiesUpToLevel(level):
-    return [enemy for enemy in getEnemiesList() if enemy.level <= level]
+    return [enemy for enemy in getEnemiesList() if not enemy.level==None and enemy.level <= level]
