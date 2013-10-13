@@ -12,7 +12,7 @@ class Enemies(Image):
         self.window=window
         g.GraphicsObject.__init__(self, [])
         imageDir=os.curdir + os.sep + "images" + os.sep + str(self.__class__).split('.')[1]
-        images=[os.path.join(imageDir, f) for f in os.listdir(imageDir)]
+        images=[os.path.join(imageDir, f) for f in os.listdir(imageDir) if f.endswith(".gif")]
         images.sort()
         self.eliminatedImage=images.pop()
         self.imageId = Image.idCount
