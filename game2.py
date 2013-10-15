@@ -64,7 +64,8 @@ class Game(GraphWin):
 		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
 		background.draw(self)
 		hero=Hero()
-		enemy=[enemyclasses.enemy2(self),enemyclasses.enemy3(self),enemyclasses.enemy4(self),enemyclasses.enemy5(self),enemyclasses.enemy6(self)]
+		enemyClassList=enemyclasses.getAllEnemies(maxLevel=1)
+		enemy=[random.choice(enemyClassList)(self)]
 		
 		while self.gameRunning:
 			mouseClick = self.checkMouse()
