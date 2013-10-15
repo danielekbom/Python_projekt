@@ -80,6 +80,8 @@ class Enemies(Image):
                 return True
         return False
 
+class Enemy(Enemies):
+    '''Normal enemy base class'''
 
 class Boss(Enemies):
     '''Boss Base Class'''
