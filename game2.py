@@ -63,7 +63,7 @@ class Game(GraphWin):
 		'''
 		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
 		background.draw(self)
-		hero=Hero()
+		hero=Hero(self)
 		enemyClassList=enemyclasses.getAllEnemies(maxLevel=1)
 		enemy=[random.choice(enemyClassList)(self)]
 		
@@ -127,10 +127,13 @@ class Game(GraphWin):
 				return mouseClick
 		return None
 
-class Hero():
+class Hero(Image):
 	'''Our hero! Haz HP and shit!'''
-	hp=100
-	hero = Image(Point(10,300),"images/hero/hero1.gif")
+	def __init__(self,window):
+		self.window=window
+		self.hp=100
+		Image.__init__(self,Point(10,300),"images/hero/hero1.gif")
+		self.draw(window)
 
 	def isDead(self):
 		'''Is he dead? Hell NO!'''
