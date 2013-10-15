@@ -64,13 +64,7 @@ class Game(GraphWin):
 		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
 		background.draw(self)
 		hero=Hero()
-		enemy=[enemyclasses.enemy1(self),enemyclasses.enemy2(self),enemyclasses.enemy3(self),enemyclasses.enemy4(self),enemyclasses.enemy5(self),enemyclasses.enemy6(self)]
-		count = 0
-		for x in enemy:
-			if enemy[count].level != 1:
-				del enemy[count]
-			count = count + 1
-		
+		enemy=[enemyclasses.enemy2(self),enemyclasses.enemy3(self),enemyclasses.enemy4(self),enemyclasses.enemy5(self),enemyclasses.enemy6(self)]
 		
 		while self.gameRunning:
 			mouseClick = self.checkMouse()
