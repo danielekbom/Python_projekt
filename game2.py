@@ -145,12 +145,12 @@ class Hero(graphics.Image):
 		'''Is he dead? Hell NO!'''
 		return self.hp<=0
 		
-class Life(Image):
+class Life(graphics.Image):
 	def __init__(self,window,startLife):
 		self.window = window
 		positionX=100
 		for x in range(startLife):
-			Image.__init__(self,Point(positionX,30),"images/lifeIcon.gif")
+			graphics.Image.__init__(self,Point(positionX,30),"images/lifeIcon.gif")
 			positionX = positionX + 30
 			self.draw(window)
 
