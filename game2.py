@@ -64,6 +64,7 @@ class Game(GraphWin):
 		'''
 		self.setBackground(level)
 		hero=Hero(self)
+		life=Life(self,3)
 		enemyClassList=enemyclasses.getAllEnemies(maxLevel=1)
 		enemies=[random.choice(enemyClassList)(self)]
 		
@@ -143,6 +144,15 @@ class Hero(graphics.Image):
 	def isDead(self):
 		'''Is he dead? Hell NO!'''
 		return self.hp<=0
+		
+class Life(Image):
+	def __init__(self,window,startLife):
+		self.window = window
+		positionX=100
+		for x in range(startLife):
+			Image.__init__(self,Point(positionX,30),"images/lifeIcon.gif")
+			positionX = positionX + 30
+			self.draw(window)
 
 def main():
 	game=Game()
