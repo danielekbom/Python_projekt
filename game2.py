@@ -81,6 +81,9 @@ class Game(GraphWin):
 		while self.gameRunning:
 			mouseClick = self.checkMouse()
 			if mouseClick:
+				click_x = mouseClick.getX()
+				click_y = mouseClick.getY()
+				currentScore.setSize(36)
 				pass
 				
 			for enemy in enemies:
