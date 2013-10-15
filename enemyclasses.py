@@ -42,6 +42,18 @@ class enemy8(Enemy):
     level=3
     hp=8
 
+class enemy9(Enemy):
+    '''Enemy 9'''
+    id=9
+    level=3
+    hp=8
+
+class enemy10(Enemy):
+    '''Enemy 10'''
+    id=10
+    level=3
+    hp=8
+
 # Bosses inherits the Boss class 
 
 class boss1(Boss):
