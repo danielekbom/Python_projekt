@@ -1,4 +1,5 @@
-from graphics import _root,GraphWin,Point,Image,Text
+import graphics
+from graphics import _root,GraphWin,Point,Text
 import time
 import random
 import enemyclasses
@@ -22,7 +23,7 @@ class Game(GraphWin):
 		tk.Canvas.__init__(self, master, width=width, height=height,cursor="cross")
 		self.master.title(title)
 		self.pack()
-		master.resizable(0,0)
+		#master.resizable(0,0)
 		self.foreground = "black"
 		self.items = []
 		self.mouseX = None
@@ -61,7 +62,7 @@ class Game(GraphWin):
 		Game loop idea taken from
 		http://www.koonsolo.com/news/dewitters-gameloop/
 		'''
-		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
+		background = graphics.Image(Point(self.width/2,self.height/2),"images/background1.gif")
 		background.draw(self)
 		hero=Hero(self)
 		enemyClassList=enemyclasses.getAllEnemies(maxLevel=1)
@@ -127,12 +128,12 @@ class Game(GraphWin):
 				return mouseClick
 		return None
 
-class Hero(Image):
+class Hero(graphics.Image):
 	'''Our hero! Haz HP and shit!'''
 	def __init__(self,window):
 		self.window=window
 		self.hp=100
-		Image.__init__(self,Point(10,300),"images/hero/hero1.gif")
+		graphics.Image.__init__(self,Point(10,300),"images/hero/hero1.gif")
 		self.draw(window)
 
 	def isDead(self):
