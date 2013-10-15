@@ -8,16 +8,22 @@ try:
 except:
 	import tkinter as tk
 
+from PIL import Image, ImageTk
+
 MARGIN_TOP_BOTTOM=72
 MARGIN_SIDES=72
 
 class Game(GraphWin):
 	
 	def __init__(self):
+		
+		#Runs in fullscreen
+		_root.attributes('-fullscreen', True)
+		
 		#GraphWin.__init__
 		master = tk.Toplevel(_root)
-		width = master.winfo_screenwidth()-MARGIN_SIDES
-		height = master.winfo_screenheight()-MARGIN_TOP_BOTTOM
+		width = master.winfo_screenwidth() #-MARGIN_SIDES
+		height = master.winfo_screenheight() #-MARGIN_TOP_BOTTOM
 		title="AlabamaMAN! Shootin' turtels and beavers and snakes and frikkin' BEATURAKES! AlabamaMAN!"
 		master.protocol("WM_DELETE_WINDOW", self.close)
 		tk.Canvas.__init__(self, master, width=width, height=height,cursor="cross")
@@ -88,7 +94,6 @@ class Game(GraphWin):
 			del enemy
 		del enemies
 		del hero
-		del background
 		GraphWin.close(self)
 		
 	def highscore(self):
@@ -129,8 +134,15 @@ class Game(GraphWin):
 		return None
 		
 	def setBackground(self,level):
-		background = graphics.Image(Point(self.width/2,self.height/2),"images/background" + str(level) + ".gif")
-		background.draw(self)
+		filename="images/background" + str(level) + ".gif"
+		
+		backgroundimg=Image.open(filename)
+		
+		rezimg=backgroundimg.resize((self.width, self.height), Image.ANTIALIAS)
+		
+		self.photoimg=ImageTk.PhotoImage(rezimg)
+		
+		self.create_image(0,0,anchor="nw",image=self.photoimg)
 	
 
 class Hero(graphics.Image):
@@ -138,6 +150,7 @@ class Hero(graphics.Image):
 	def __init__(self,window):
 		self.window=window
 		self.hp=100
+		
 		graphics.Image.__init__(self,Point(10,300),"images/hero/hero1.gif")
 		self.draw(window)
 
