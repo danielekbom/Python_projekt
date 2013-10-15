@@ -8,7 +8,10 @@ try:
 except:
 	import tkinter as tk
 
-from PIL import Image, ImageTk
+try:
+	from PIL import Image, ImageTk
+except:
+	from pil import Image, ImageTk
 
 MARGIN_TOP_BOTTOM=72
 MARGIN_SIDES=72
@@ -151,7 +154,7 @@ class Hero(graphics.Image):
 		self.window=window
 		self.hp=100
 		
-		graphics.Image.__init__(self,Point(10,300),"images/hero/hero1.gif")
+		graphics.Image.__init__(self,Point(130,400),"images/hero/hero1.gif")
 		self.draw(window)
 
 	def isDead(self):
