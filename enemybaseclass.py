@@ -71,8 +71,13 @@ class Enemies(Image):
     def getMovementSpeed(self):
         return self.movementSpeed
     
+	def hitTest(self,p):
+		click_X = p.getX
+		click_Y = p.getY
+		return False
+	
     def kill(self,p,damage=1,radius=1):
-        if hit(p):
+        if(self.hitTest(p)):
             hp=hp-damage
             if hp<=0:
                 self.eliminated=True
