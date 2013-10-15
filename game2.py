@@ -52,7 +52,7 @@ class Game(GraphWin):
 		del closeText
 		self.gameRunning=False
 	
-	def play(self, level=None):
+	def play(self, level=1):
 		'''
 		Starts a new game.
 		
@@ -61,8 +61,9 @@ class Game(GraphWin):
 		Game loop idea taken from
 		http://www.koonsolo.com/news/dewitters-gameloop/
 		'''
-		background = Image(Point(self.width/2,self.height/2),"images/background1.gif")
-		background.draw(self)
+		
+		self.setBackground(level)
+
 		hero=Hero(self)
 		enemyClassList=enemyclasses.getAllEnemies(maxLevel=1)
 		enemies=[random.choice(enemyClassList)(self)]
@@ -126,6 +127,11 @@ class Game(GraphWin):
 			else:
 				return mouseClick
 		return None
+		
+	def setBackground(self,level):
+		background = Image(Point(self.width/2,self.height/2),"images/background" + str(level) + ".gif")
+		background.draw(self)
+	
 
 class Hero(Image):
 	'''Our hero! Haz HP and shit!'''
