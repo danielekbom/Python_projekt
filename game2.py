@@ -65,6 +65,11 @@ class Game(GraphWin):
 		background.draw(self)
 		hero=Hero()
 		enemy=[enemyclasses.enemy1(self),enemyclasses.enemy2(self),enemyclasses.enemy3(self),enemyclasses.enemy4(self),enemyclasses.enemy5(self),enemyclasses.enemy6(self)]
+		count = 0
+		for x in enemy:
+			if enemy[count].level != 1:
+				del enemy[count]
+			count = count + 1
 		
 		
 		while self.gameRunning:
@@ -130,6 +135,8 @@ class Game(GraphWin):
 class Hero():
 	'''Our hero! Haz HP and shit!'''
 	hp=100
+	hero = Image(Point(10,300),"images/hero/hero1.gif")
+
 	def isDead(self):
 		'''Is he dead? Hell NO!'''
 		return self.hp<=0
