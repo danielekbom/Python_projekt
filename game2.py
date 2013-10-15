@@ -65,15 +65,15 @@ class Game(GraphWin):
 		background.draw(self)
 		hero=Hero(self)
 		enemyClassList=enemyclasses.getAllEnemies(maxLevel=1)
-		enemy=[random.choice(enemyClassList)(self)]
+		enemies=[random.choice(enemyClassList)(self)]
 		
 		while self.gameRunning:
 			mouseClick = self.checkMouse()
 			if mouseClick:
 				pass
 				
-			for en in enemy:
-				en.walk()
+			for enemy in enemies:
+				enemy.walk()
 			
 			
 			
@@ -83,9 +83,9 @@ class Game(GraphWin):
 			del mouseClick
 			if self.gameRunning and hero.isDead():
 				self.gameOver()
-		for en in enemy:
-			del en
-		del enemy
+		for enemy in enemies:
+			del enemy
+		del enemies
 		del hero
 		del background
 		GraphWin.close(self)
