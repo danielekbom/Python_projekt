@@ -37,7 +37,7 @@ class Game(GraphWin):
 		self.mouseY = None
 		self.bind("<Button-1>", self._onClick)
 		self.autoflush = True
-		self._mouseCallback = None
+		self._mouseCallback = 
 		self.trans = None
 		self.closed = False
 		self.gameClosing = False
@@ -88,7 +88,7 @@ class Game(GraphWin):
 	def gameloop(self):
 		mouseClick = self.checkMouse()
 		if mouseClick:
-			self.resizeBackground()
+			pass
 		
 		for enemy in self.enemies:
 			enemy.walk()
@@ -153,17 +153,6 @@ class Game(GraphWin):
 		self.bgImageID = self.create_image(0,0,anchor="nw",image=self.bgImage)
 		self.tag_lower(self.bgImageID)
 	
-	def resizeBackground(self):
-		print "resizeBg "+str(self.getWidth()) + " " + str(time.clock())
-		self.delete(self.bgImageID)
-		
-		rezisedImageObj = self.bgImageObj.resize((self.getWidth(), self.getHeight()), PIL_Image.ANTIALIAS)
-		
-		self.bgImage = ImageTk.PhotoImage(rezisedImageObj)
-		
-		self.bgImageID = self.create_image(0,0,anchor="nw",image=self.bgImage)
-		self.tag_lower(self.bgImageID)
-		
 	def removeBackground(self):
 		self.delete(self.bgImageID)
 		del self.bgImageID
