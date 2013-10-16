@@ -1,6 +1,5 @@
 import graphics
-from graphics import _root,GraphWin,Point,Text,Image
-from PIL import Image as PIL_Image, ImageTk
+from graphics import _root,GraphWin,Point,Text
 import time
 import random
 import enemyclasses
@@ -9,10 +8,12 @@ try:
 except:
 	import tkinter as tk
 
+from PIL import Image, ImageTk
+
 MARGIN_TOP_BOTTOM=72
 MARGIN_SIDES=72
 
-class Game(tk.Canvas):
+class Game(GraphWin):
 	
 	def __init__(self):
 		
@@ -24,7 +25,7 @@ class Game(tk.Canvas):
 		width = master.winfo_screenwidth() #-MARGIN_SIDES
 		height = master.winfo_screenheight() #-MARGIN_TOP_BOTTOM
 		title="AlabamaMAN! Shootin' turtels and beavers and snakes and frikkin' BEATURAKES! AlabamaMAN!"
-		master.protocol("WM_DELETE_WINDOW", self.confirmClose)
+		master.protocol("WM_DELETE_WINDOW", self.close)
 		tk.Canvas.__init__(self, master, width=width, height=height,cursor="cross")
 		self.master.title(title)
 		self.pack()
@@ -34,7 +35,9 @@ class Game(tk.Canvas):
 		self.mouseX = None
 		self.mouseY = None
 		self.bind("<Button-1>", self._onClick)
-		self.autoflush = True
+		self.height = height
+		self.width = width
+		self.autoflush = False
 		self._mouseCallback = None
 		self.trans = None
 		self.closed = False
@@ -43,7 +46,7 @@ class Game(tk.Canvas):
 		master.lift()
 		if self.autoflush: _root.update()
 	
-	def confirmClose(self):
+	def close(self):
 		if self.gameClosing:
 			return
 		self.gameClosing=True
@@ -54,7 +57,7 @@ class Game(tk.Canvas):
 		wait = self.getMouse()
 		closeText.undraw()
 		del closeText
-		self.closeGame()
+		self.gameRunning=False
 	
 	def play(self, level=1):
 		'''
@@ -66,42 +69,33 @@ class Game(tk.Canvas):
 		http://www.koonsolo.com/news/dewitters-gameloop/
 		'''
 		self.setBackground(level)
-		self.hero=Hero(self)
-		self.life=Life(self,3)
-		enemyClassList=enemyclasses.getAllEnemies(maxLevel=level)
-		self.enemies=[random.choice(enemyClassList)(self)]
+		hero=Hero(self)
+		life=Life(self,3)
+		enemyClassList=enemyclasses.getAllEnemies(maxLevel=1)
+		enemies=[random.choice(enemyClassList)(self)]
 		
-		_root.update()
-		
-		self.after(0,self.gameloop)
-		
-	def closeGame(self):
-		for enemy in self.enemies:
-			del enemy
-		del self.enemies
-		del self.hero
-		self.close()
-		_root.quit()
-		
-	def gameloop(self):
-		mouseClick = self.checkMouse()
-		if mouseClick:
-			self.resizeBackground()
-		
-		for enemy in self.enemies:
-			enemy.walk()
-			self.tag_raise(enemy.imageId)
-		
-		
-		_root.update()
-		
-		del mouseClick
-		if self.gameRunning:
-			if self.hero.isDead():
+		while self.gameRunning:
+			mouseClick = self.checkMouse()
+			if mouseClick:
+				pass
+				
+			for enemy in enemies:
+				enemy.walk()
+			
+			
+			
+			time.sleep(0.01)
+			_root.update()
+			
+			del mouseClick
+			if self.gameRunning and hero.isDead():
 				self.gameOver()
-			elif not self.gameClosing:
-				self.after(10,self.gameloop)
-
+		for enemy in enemies:
+			del enemy
+		del enemies
+		del hero
+		GraphWin.close(self)
+		
 	def highscore(self):
 		pass
 	
@@ -140,32 +134,15 @@ class Game(tk.Canvas):
 		return None
 		
 	def setBackground(self,level):
-		filename = "images/background" + str(level) + ".gif"
+		filename="images/background" + str(level) + ".gif"
 		
-		self.bgImageObj = PIL_Image.open(filename)
+		backgroundimg=Image.open(filename)
 		
-		rezisedImageObj = self.bgImageObj.resize((self.getWidth(), self.getHeight), PIL_Image.ANTIALIAS)
+		rezimg=backgroundimg.resize((self.width, self.height), Image.ANTIALIAS)
 		
-		self.bgImage = ImageTk.PhotoImage(rezisedImageObj)
+		self.photoimg=ImageTk.PhotoImage(rezimg)
 		
-		self.bgImageID = self.create_image(0,0,anchor="nw",image=self.bgImage)
-		self.tag_lower(self.bgImageID)
-	
-	def resizeBackground(self):
-		print "resizeBg "+str(self.getWidth()) + " " + str(time.clock())
-		self.delete(self.bgImageID)
-		
-		rezisedImageObj = self.bgImageObj.resize((self.getWidth(), self.getHeight()), PIL_Image.ANTIALIAS)
-		
-		self.bgImage = ImageTk.PhotoImage(rezisedImageObj)
-		
-		self.bgImageID = self.create_image(0,0,anchor="nw",image=self.bgImage)
-		self.tag_lower(self.bgImageID)
-		
-	def removeBackground(self):
-		self.delete(self.bgImageID)
-		del self.bgImageID
-		del self.bgImage
+		self.create_image(0,0,anchor="nw",image=self.photoimg)
 	
 
 class Hero(graphics.Image):
@@ -192,8 +169,8 @@ class Life(graphics.Image):
 
 def main():
 	game=Game()
-	game.menu()
-	_root.mainloop()
+	while game.gameRunning:
+		game.menu()
 
 if __name__ == "__main__":
 	main()
