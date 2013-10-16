@@ -27,7 +27,7 @@ class Game(GraphWin):
 		title="AlabamaMAN! Shootin' turtels and beavers and snakes and frikkin' BEATURAKES! AlabamaMAN!"
 		master.protocol("WM_DELETE_WINDOW", self.confirmClose)
 		tk.Canvas.__init__(self, master, width = width, height = height, cursor="cross")
-		self.master.bind("<Escape>", self.confirmClose)
+		self.bind("<Button-1>", self.confirmClose)
 		self.master.title(title)
 		self.pack()
 		#master.resizable(0,0)
@@ -38,6 +38,7 @@ class Game(GraphWin):
 		self.mouseX = None
 		self.mouseY = None
 		self.bind("<Button-1>", self._onClick)
+		self.bind("<Escape>", self.escConfirmClose)
 		self.autoflush = True
 		self._mouseCallback = None
 		self.trans = None
@@ -47,6 +48,8 @@ class Game(GraphWin):
 		master.lift()
 		if self.autoflush: _root.update()
 	
+	def escConfirmClose(self,event):
+		self.confirmClose()
 	def confirmClose(self):
 		if self.gameClosing:
 			return
