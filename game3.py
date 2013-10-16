@@ -17,15 +17,17 @@ class Game(GraphWin):
 	def __init__(self):
 		
 		#Runs in fullscreen
-		_root.attributes('-fullscreen', True)
 		
 		#GraphWin.__init__
+		_root.attributes('-fullscreen', True)
 		master = tk.Toplevel(_root)
+		master.attributes('-fullscreen', True)
 		width = master.winfo_screenwidth() #-MARGIN_SIDES
 		height = master.winfo_screenheight() #-MARGIN_TOP_BOTTOM
 		title="AlabamaMAN! Shootin' turtels and beavers and snakes and frikkin' BEATURAKES! AlabamaMAN!"
 		master.protocol("WM_DELETE_WINDOW", self.confirmClose)
-		tk.Canvas.__init__(self, master, width=width, height=height,cursor="cross")
+		tk.Canvas.__init__(self, master, width = width, height = height, cursor="cross")
+		self.master.bind("<Escape>", self.confirmClose)
 		self.master.title(title)
 		self.pack()
 		#master.resizable(0,0)
@@ -37,7 +39,7 @@ class Game(GraphWin):
 		self.mouseY = None
 		self.bind("<Button-1>", self._onClick)
 		self.autoflush = True
-		self._mouseCallback = 
+		self._mouseCallback = None
 		self.trans = None
 		self.closed = False
 		self.gameClosing = False
