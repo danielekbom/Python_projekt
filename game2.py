@@ -8,7 +8,10 @@ try:
 except:
 	import tkinter as tk
 
-from PIL import Image, ImageTk
+try:
+	from PIL import Image, ImageTk
+except:
+	from pil import Image, ImageTk
 
 MARGIN_TOP_BOTTOM=72
 MARGIN_SIDES=72
@@ -70,13 +73,16 @@ class Game(GraphWin):
 		'''
 		self.setBackground(level)
 		hero=Hero(self)
-		life=Life(self,3)
+		life=Life(self,3,self.width)
+		currentScore=CurrentScore(self,self.width)
 		enemyClassList=enemyclasses.getAllEnemies(maxLevel=1)
 		enemies=[random.choice(enemyClassList)(self)]
 		
 		while self.gameRunning:
 			mouseClick = self.checkMouse()
 			if mouseClick:
+				if(enemies[0].kill(mouseClick)):
+					currentScore.setSize(36)
 				pass
 				
 			for enemy in enemies:
@@ -151,7 +157,7 @@ class Hero(graphics.Image):
 		self.window=window
 		self.hp=100
 		
-		graphics.Image.__init__(self,Point(10,300),"images/hero/hero1.gif")
+		graphics.Image.__init__(self,Point(130,400),"images/hero/hero1.gif")
 		self.draw(window)
 
 	def isDead(self):
@@ -159,13 +165,22 @@ class Hero(graphics.Image):
 		return self.hp<=0
 		
 class Life(graphics.Image):
-	def __init__(self,window,startLife):
+	def __init__(self,window,startLife,screenWidth):
 		self.window = window
-		positionX=100
+		positionX = screenWidth/2.4
 		for x in range(startLife):
 			graphics.Image.__init__(self,Point(positionX,30),"images/lifeIcon.gif")
 			positionX = positionX + 30
 			self.draw(window)
+			
+class CurrentScore(graphics.Text):
+	def __init__(self,window,screenWidth):
+		currentScore = 0
+		self.window = window
+		graphics.Text.__init__(self,Point(screenWidth/2,30),"Score: " + str(currentScore))
+		self.setStyle("bold")
+		self.setSize(18)
+		self.draw(window)
 
 def main():
 	game=Game()
